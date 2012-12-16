@@ -6,11 +6,18 @@ window.onload = function()
 	canvas = document.getElementById('canvas');
 	context = canvas.getContext('2d');
 
-	screenWidth = window.innerWidth;
-	screenHeight = window.innerHeight;
+	var resize = function()
+    {
+        screenWidth = window.innerWidth;
+        screenHeight = window.innerHeight;
 
-	canvas.width = screenWidth;
-	canvas.height = screenHeight;
+        canvas.width = screenWidth;
+        canvas.height = screenHeight;
+    };
+
+    resize();
+
+    window.onresize = resize;
 
 	var playground = new Playground(context);
 };
