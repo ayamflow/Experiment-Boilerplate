@@ -17,7 +17,7 @@ window.onload = function()
 
     resize();
 
-    window.onresize = resize;
+    window.addEventListener('resize', resize);
 
 	var playground = new Playground(context);
 };
