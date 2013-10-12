@@ -1,0 +1,95 @@
+define(['Resize', 'Stats'], function(Resize, Stats) {
+
+    var Playground = function()
+    {
+        // Variables (usefull for dat.GUI)
+        this.mouse = {
+            x: Resize.halfScreenWidth,
+            y: Resize.halfScreenHeight
+        };
+        this.trails = false;
+        this.density = 80;
+
+        this.isDebug = true;
+        if(this.isDebug)
+        {
+            this.debug();
+        }
+
+        // Kick it !
+        this.init();
+        this.animate();
+    };
+
+    Playground.prototype = {
+        init: function()
+        {
+            // Pixi init
+            // this.renderer = new PIXI.WebGLRenderer(Resize.screenWidth, Resize.screenHeight);
+            // document.body.appendChild(this.renderer.view);
+            // this.stage = new PIXI.Stage();
+
+            // Classic canvas init
+            this.canvas = document.createElement('canvas');
+            this.canvas.width = Resize.screenWidth;
+            this.canvas.height = Resize.screenHeight;
+            this.context = this.canvas.getContext("2d");
+            document.body.appendChild(this.canvas);
+
+            // Object init logic
+            // var p = new Particle(...)
+
+            window.addEventListener('resize', this.onResize.bind(this));
+            window.addEventListener('mousemove', this.onMouseMove.bind(this));
+            window.addEventListener('click', this.onMouseClick.bind(this));
+        },
+
+        onMouseMove: function(e) {
+            this.mouse.x = e.clientX;
+            this.mouse.y = e.clientY;
+        },
+
+        onMouseClick: function(e) {
+
+        },
+
+        onResize: function() {
+            Resize.resize();
+            this.canvas.width = Resize.screenWidth;
+            this.canvas.height = Resize.screenHeight;
+        },
+
+        animate: function()
+        {
+            if(this.trails)
+            {
+                this.context.fillStyle = "rgba(0,0,0,0.05)";
+                this.context.fillRect(0, 0, Resize.screenWidth, Resize.screenHeight);
+            }
+            else
+            {
+                this.context.clearRect(0, 0, Resize.screenWidth, Resize.screenHeight);
+            }
+            if(this.isDebug)
+            {
+                this.stats.update();
+            }
+
+            // EXPERIMENT LOGIC
+            // particle.update(...)
+
+            requestAnimationFrame(this.animate.bind(this));
+        },
+
+        debug: function() {
+            this.stats = new Stats();
+            this.stats.domElement.style.position = 'absolute';
+            this.stats.domElement.style.left = '0px';
+            this.stats.domElement.style.top = '0px';
+            this.stats.domElement.style.zIndex = '100';
+            document.body.appendChild(this.stats.domElement);
+        }
+    };
+
+    return Playground;
+});
