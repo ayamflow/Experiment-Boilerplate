@@ -1,15 +1,15 @@
 require.config({
     baseUrl: 'src/experiment',
     paths: {
-        PIXI: '../../lib/pixi',
-        Stats: '../../lib/stats.min'
+        Stats: '../../lib/stats.min',
+        Leap: '../../lib/leap.min'
     },
     shim: {
-        'PIXI': {
-            exports: 'PIXI'
-        },
         'Stats': {
             exports: 'Stats'
+        },
+        'Leap': {
+            exports: 'Leap'
         }
     }
 });

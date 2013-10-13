@@ -11,15 +11,24 @@ It includes a set of useful libraries availables through Github or Google code, 
 * [dat.gui](http://workshop.chromeexperiments.com/examples/gui/#1--Basic-Usage) A nice UI to live-edit variables
 * [Stats.js](https://github.com/mrdoob/stats.js/) FPS/MS overlay
 * [Pixi.js](https://github.com/GoodBoyDigital/pixi.js) If needed, for a simple WebGLRenderer
+* [GruntJS](http://gruntjs.com) For starting a static server with `$ grunt connect`
 
 ## Helpers
 * Resize.js A very simple helper to manage Window and access window size.
+* Mouse.js Simple helper to keep track of Mouse current/previous positions and clicks number.
+* LeapBridge.js Simple helper to keep track of current/previous positions of 10 fingers.
 * Playground.js The global controller.
+* MathHelper.js A set of classic math function such as distance or angle between 2 points.
+
+## Entities
+* Pool.js A tiny object pool class. Untested and WIP.
 
 ## Next to come
-* Basic Object Pool
+* Better Object Pool
 * Basic Particle class
-* More helpers (Mouse, Extend/Class, …)
+* More helpers (Renderers ?, Extend/Class, …)
 
-## About the current version
-The first version included FlowUtils, a tiny library provinding a set of convenient functions for creating color range or calculating distance between points. Since I haven't worked a lot on it recently, I might drop it and just use TinyColor and create some Math helpers functions.
+## Changelog
+* v0.3.2: Removed Pixi.js for now, added GruntJS for quick static server, added Math, Mouse and LeapBridge helpers. Turned Resize to a singleton with a resizables array. Added a basic object pool.
+* v0.3.1: Removed facebook/twitter/modernizr/html5shim. Added Pixi.js, moved to RequireJS/AMD modules. Added TinyColors, removed FlowUtils.
+* Under 0.3: Basic boilerplate including facebook/twitter share buttons, Modernizr, html5shim.

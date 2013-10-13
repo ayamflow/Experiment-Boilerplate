@@ -1,12 +1,8 @@
-define(['Resize', 'Stats'], function(Resize, Stats) {
+define(['helpers/Resize', 'helpers/Mouse', 'Stats'], function(Resize, Mouse, Stats) {
 
     var Playground = function()
     {
         // Variables (usefull for dat.GUI)
-        this.mouse = {
-            x: Resize.halfScreenWidth,
-            y: Resize.halfScreenHeight
-        };
         this.trails = false;
         this.density = 80;
 
@@ -24,11 +20,6 @@ define(['Resize', 'Stats'], function(Resize, Stats) {
     Playground.prototype = {
         init: function()
         {
-            // Pixi init
-            // this.renderer = new PIXI.WebGLRenderer(Resize.screenWidth, Resize.screenHeight);
-            // document.body.appendChild(this.renderer.view);
-            // this.stage = new PIXI.Stage();
-
             // Classic canvas init
             this.canvas = document.createElement('canvas');
             this.canvas.width = Resize.screenWidth;
@@ -36,27 +27,13 @@ define(['Resize', 'Stats'], function(Resize, Stats) {
             this.context = this.canvas.getContext("2d");
             document.body.appendChild(this.canvas);
 
+            // Resize the canvas on resize events
+            Resize.resizables.push(this.canvas);
+
             // Object init logic
             // var p = new Particle(...)
 
-            window.addEventListener('resize', this.onResize.bind(this));
-            window.addEventListener('mousemove', this.onMouseMove.bind(this));
-            window.addEventListener('click', this.onMouseClick.bind(this));
-        },
-
-        onMouseMove: function(e) {
-            this.mouse.x = e.clientX;
-            this.mouse.y = e.clientY;
-        },
-
-        onMouseClick: function(e) {
-
-        },
-
-        onResize: function() {
-            Resize.resize();
-            this.canvas.width = Resize.screenWidth;
-            this.canvas.height = Resize.screenHeight;
+            this.mouse = new Mouse(Resize.screenWidth, Resize.screenHeight);
         },
 
         animate: function()
