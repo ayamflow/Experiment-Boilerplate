@@ -1,7 +1,7 @@
 define(function() {
     return {
         rand: function(min, max) {
-            return Math.rand() * (max - min) + min;
+            return Math.random() * (max - min) + min;
         },
 
         dist: function(x1, y1, x2, y2) {
